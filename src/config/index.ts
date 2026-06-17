@@ -7,7 +7,8 @@ dotenv.config({
 
 const config = {
     port: process.env.PORT,
-    db_secret: process.env.DB_SECRET
+    db_secret: process.env.DB_SECRET,
+    token_secret: process.env.TOKEN_SECRET
 }
 
 export default config
