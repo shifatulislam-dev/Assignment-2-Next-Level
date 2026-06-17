@@ -7,6 +7,8 @@ import { pool } from "../db";
 const auth = (...Roles: ROLE_TYPE[]) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         const token = req.headers.authorization
+        // console.log(req.headers, req.headers.authorization, token);
+        
         if (!token) {
             res.status(401).json({
                 success: false,
@@ -19,7 +21,7 @@ const auth = (...Roles: ROLE_TYPE[]) => {
         const userData = await pool.query(`
                 SELECT * FROM users WHERE email=$1
             `, [userDecoded.email])
-        if (userData.rows, length === 0) {
+        if (userData.rows.length === 0) {
             res.status(401).json({
                 success: false,
                 message: "Invalid token"
