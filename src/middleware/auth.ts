@@ -7,7 +7,6 @@ import { pool } from "../db";
 const auth = (...Roles: ROLE_TYPE[]) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         const token = req.headers.authorization
-        // console.log(req.headers, req.headers.authorization, token);
         
         if (!token) {
             res.status(401).json({
@@ -35,6 +34,7 @@ const auth = (...Roles: ROLE_TYPE[]) => {
                 message: "Unauthorized"
             })
         }
+        
 
         next()
     }
