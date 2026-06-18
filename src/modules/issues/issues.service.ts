@@ -1,7 +1,8 @@
 import type { Request, Response } from "express"
 import { pool } from "../../db"
+import type { IIssues } from "./issues.interface"
 
-const createIssuesIntoDB = async (payload: { title: string, description: string, type: string}, user : any) => {
+const createIssuesIntoDB = async (payload: IIssues, user : any) => {
     const { title, description, type } = payload
 
     const issuesData = await pool.query(`
@@ -27,8 +28,17 @@ const getSingleIssueFromDB = async(id : string)=>{
     return result.rows[0]
 }
 
+const updateIssueFromDB = async(payload : IIssues, id : string)=>{
+    const {title, description, type} = payload
+    const result = await pool.query(`
+            UPDATE issues SET title = COALESCE($1, title), description = COALESCE($2, description), type = COALESCE($3, type) WHERE id=$4 RETURNING *
+        `,[title, description, type, id])
+    return result
+}
+
 export const issuesService = {
     createIssuesIntoDB,
     getAllIssuesFromDB,
-    getSingleIssueFromDB
+    getSingleIssueFromDB,
+    updateIssueFromDB
 }
