@@ -4,3 +4,15 @@ export const USER_ROLE = {
 }
 
 export type ROLE_TYPE = "contributor" | "maintainer"
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: {
+        id: number;
+        email: string;
+        role: ROLE_TYPE;
+      };
+    }
+  }
+}

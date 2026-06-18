@@ -34,6 +34,9 @@ const auth = (...Roles: ROLE_TYPE[]) => {
                 message: "Unauthorized"
             })
         }
+
+        req.user = user
+        // console.log(req.user);
         
 
         next()
