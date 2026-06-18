@@ -13,6 +13,14 @@ const createIssuesIntoDB = async (payload: { title: string, description: string,
     return issue
 }
 
+const getAllIssuesFromDB = async()=>{
+    const result = await pool.query(`
+            SELECT * FROM issues
+        `)
+    return result
+}
+
 export const issuesService = {
-    createIssuesIntoDB
+    createIssuesIntoDB,
+    getAllIssuesFromDB
 }
