@@ -1,7 +1,8 @@
 import { pool } from "../../db"
 import bcrypt from "bcryptjs";
+import type { IUser } from "./user.interface";
 
-const userRegIntoDB = async (payload : any) => {
+const userRegIntoDB = async (payload : IUser) => {
     const {name, email, password, role} = payload
     const hashPassword = await bcrypt.hash(password, 10)
 

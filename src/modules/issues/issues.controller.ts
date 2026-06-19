@@ -62,7 +62,8 @@ const getSingleIssue = async (req: Request, res: Response) => {
 const updateIssue = async (req: Request, res: Response) => {
     try {
         const { id } = req.params
-        const result = await issuesService.updateIssueFromDB(req.body, id as string)
+        const user = req.user
+        const result = await issuesService.updateIssueFromDB(req.body, id as string , user)
 
         if (result.rows.length === 0) {
             res.status(404).json({

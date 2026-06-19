@@ -2,5 +2,6 @@ export interface IIssues{
     title: string,
     description: string,
     type: string,
-    reporter_id?: number
+    reporter_id?: number,
+    status?: string
 }
