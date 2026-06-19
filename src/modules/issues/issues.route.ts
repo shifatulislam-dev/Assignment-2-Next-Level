@@ -9,5 +9,6 @@ router.post("/", auth(USER_ROLE.contributor as ROLE_TYPE, USER_ROLE.maintainer a
 router.get("/", issuesController.getAllIssues)
 router.get("/:id", issuesController.getSingleIssue)
 router.patch("/:id", auth(USER_ROLE.contributor as ROLE_TYPE, USER_ROLE.maintainer as ROLE_TYPE), issuesController.updateIssue)
+router.delete("/:id", auth(USER_ROLE.maintainer as ROLE_TYPE), issuesController.deleteIssue)
 
 export const issuesRouter = router
